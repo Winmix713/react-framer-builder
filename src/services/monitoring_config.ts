@@ -1,3 +1,4 @@
+import { EnhancedRateLimiter } from './enhanced_rate_limiter'
 // Enhanced monitoring and configuration for rate limiting
 
 // Environment configuration (.env file additions)

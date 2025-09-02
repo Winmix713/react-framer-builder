@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { getAPIInstance } from '../services/sportradarAPI';
 import APIMonitor from '../services/apiMonitor';
 import { format } from 'date-fns';
-import { TransformedMatch, SportradarMatch } from '../types/sportradar';
+import { TransformedMatch, MatchSummary } from '../types/sportradar';
 
 // Environment configuration
 const isDevelopment = import.meta.env.MODE === 'development';
@@ -191,7 +191,7 @@ export const useLiveMatches = (enablePolling = true) => {
     refetchOnWindowFocus: false,
     refetchOnMount: true, // Allow initial mount
     refetchOnReconnect: false,
-    onError: createErrorHandler('Live matches'),
+    
   });
 };
 
@@ -201,7 +201,7 @@ export const useCompetitions = () => {
   
   return useQuery({
     ...config,
-    onError: createErrorHandler('Competitions'),
+    
   });
 };
 
@@ -212,7 +212,7 @@ export const useDailyMatches = (date: Date) => {
   
   return useQuery({
     ...config,
-    onError: createErrorHandler('Daily matches'),
+    
   });
 };
 
@@ -223,7 +223,7 @@ export const useScheduledMatches = (dateISO: string) => {
   return useQuery({
     ...config,
     enabled: !!apiKey && !!dateISO,
-    onError: createErrorHandler('Scheduled matches'),
+    
   });
 };
 
@@ -234,7 +234,7 @@ export const useMatchSummary = (matchId: string, enablePolling = true) => {
   return useQuery({
     ...config,
     refetchInterval: enablePolling ? 30000 : undefined, // 30 seconds for live matches
-    onError: createErrorHandler('Match summary'),
+    
   });
 };
 
@@ -244,7 +244,7 @@ export const useSeasonSchedule = (seasonId: string) => {
   
   return useQuery({
     ...config,
-    onError: createErrorHandler('Season schedule'),
+    
   });
 };
 
@@ -254,7 +254,7 @@ export const useSeasonStandings = (seasonId: string) => {
   
   return useQuery({
     ...config,
-    onError: createErrorHandler('Season standings'),
+    
   });
 };
 
@@ -264,7 +264,7 @@ export const useSeasonOverUnder = (seasonId: string) => {
   
   return useQuery({
     ...config,
-    onError: createErrorHandler('Season over/under'),
+    
   });
 };
 
@@ -274,7 +274,7 @@ export const useHeadToHead = (homeId: string, awayId: string) => {
   
   return useQuery({
     ...config,
-    onError: createErrorHandler('Head-to-head'),
+    
   });
 };
 
@@ -284,7 +284,7 @@ export const useAPITest = () => {
   
   return useQuery({
     ...config,
-    onError: createErrorHandler('API test'),
+    
   });
 };
 
@@ -303,7 +303,7 @@ const mapMatchStatus = (status?: string): 'live' | 'scheduled' | 'finished' => {
 };
 
 // Enhanced utility function with proper typing
-export const transformMatchData = (match: SportradarMatch): TransformedMatch => {
+export const transformMatchData = (match: MatchSummary): TransformedMatch => {
   const competitors = match.sport_event?.competitors || [];
   const home = competitors.find(c => c.qualifier === 'home');
   const away = competitors.find(c => c.qualifier === 'away');

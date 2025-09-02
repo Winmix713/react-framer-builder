@@ -29,7 +29,7 @@ class SportradarAPI {
 
   constructor(apiKey: string, baseURL?: string) {
     this.apiKey = apiKey
-    this.rateLimiter = new AdvancedRateLimiter(1/60, 1, 2) // 1 request per 60 seconds, capacity 1, max 2 retries
+    this.rateLimiter = new AdvancedRateLimiter(1/90, 1, 1) // 1 request per 90 seconds, capacity 1, max 1 retry
     this.monitor = APIMonitor.getInstance()
     this.cache = CacheManager.getInstance()
     this.deduplicator = RequestDeduplicator.getInstance()
@@ -85,7 +85,9 @@ class SportradarAPI {
         "User-Agent": "SoccerPredictionHub/1.0 (https://localhost:5173)",
         Accept: "application/json",
         "Content-Type": "application/json",
-        "x-api-key": this.apiKey,
+      },
+      params: {
+        api_key: this.apiKey,
       },
     })
 
@@ -97,7 +99,7 @@ class SportradarAPI {
             url: config.url,
             baseURL: config.baseURL,
             method: config.method?.toUpperCase(),
-            hasApiKey: !!config.headers?.["x-api-key"],
+            hasApiKeyParam: !!(config.params as any)?.api_key,
             timestamp: new Date().toISOString(),
           })
         }
@@ -130,7 +132,7 @@ class SportradarAPI {
             url: error.config?.url,
             baseURL: error.config?.baseURL,
             method: error.config?.method,
-            hasApiKey: !!error.config?.headers?.["x-api-key"],
+            hasApiKeyParam: !!(error.config?.params as any)?.api_key,
             timeout: error.config?.timeout,
           },
           timestamp: new Date().toISOString(),
@@ -258,7 +260,7 @@ class SportradarAPI {
         })
       }
 
-      const response = await this.request("/soccer/trial/v4/en/competitions/sr:competition:17/info.json")
+      const response = await this.request<{ competition?: { name?: string } }>("/soccer/trial/v4/en/competitions/sr:competition:17/info.json")
 
       if (import.meta.env.MODE === "development") {
         console.log("✅ API connection test successful:", {

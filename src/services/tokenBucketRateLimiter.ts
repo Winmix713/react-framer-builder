@@ -85,7 +85,7 @@ export class TokenBucketRateLimiter {
 export const SPORTRADAR_RATE_LIMITS = {
   trial: {
     capacity: 1, // 1 request burst capacity
-    refillRate: 1 / 60, // 1 token every 60 seconds (ultra conservative for trial)
+    refillRate: 1 / 90, // 1 token every 90 seconds (extra conservative for trial)
     refillInterval: 1000, // Check every second
     initialTokens: 1,
   },

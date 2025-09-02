@@ -21,7 +21,7 @@ export class AdvancedRateLimiter {
   constructor(
     requestsPerSecond: number = 1 / 3, // 1 request per 3 seconds for trial API
     bucketCapacity = 1,
-    maxRetries = 3,
+    maxRetries = 1,
   ) {
     this.tokenBucket = new TokenBucketRateLimiter(SPORTRADAR_RATE_LIMITS.trial)
     this.maxRetries = maxRetries
@@ -94,9 +94,9 @@ export class AdvancedRateLimiter {
 
   private async waitForToken(): Promise<void> {
     while (!this.tokenBucket.consume(1)) {
-      const waitTime = this.tokenBucket.getTimeUntilNextToken()
+      const waitTime = Math.max(1000, this.tokenBucket.getTimeUntilNextToken())
       if (import.meta.env.MODE === "development") {
-        console.log(`⏳ Waiting ${waitTime}ms for next token...`)
+        console.log(`⏳ Waiting ${waitTime}ms for next token... Queue length: ${this.requestQueue.length}`)
       }
       await new Promise((resolve) => setTimeout(resolve, waitTime))
     }

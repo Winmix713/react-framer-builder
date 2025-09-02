@@ -1,6 +1,6 @@
 // Enhanced Rate Limiting Solution with Header-Based Dynamic Adjustment
 
-class EnhancedRateLimiter {
+export class EnhancedRateLimiter {
   private requests: number[] = []
   private static instance: EnhancedRateLimiter | null = null
   private maxRequests: number
