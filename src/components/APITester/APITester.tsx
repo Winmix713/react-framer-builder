@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { CheckCircle, XCircle, Loader2, RefreshCw, Key, Globe, AlertTriangle, Clock, Database, Bug } from 'lucide-react';
+import PostmanSync from '../PostmanSync/PostmanSync';
+import { useCompetitions } from '../../hooks/useSportradarData';
 
 // Types
 interface TestResult {
@@ -161,30 +163,16 @@ const HealthCheckResults: React.FC<{ checks: HealthCheck[] }> = ({ checks }) => 
   );
 };
 
-// Mock useAPITest hook for demo
+// Enhanced API test hook that uses real Sportradar API
 const useAPITest = () => {
-  const [state, setState] = useState({
-    data: null,
-    isLoading: false,
-    error: null
-  });
+  const { data, isLoading, error, refetch } = useCompetitions();
   
-  const refetch = useCallback(() => {
-    setState(prev => ({ ...prev, isLoading: true }));
-    setTimeout(() => {
-      setState({
-        data: { message: "API connection successful", competitions: new Array(5).fill({}) },
-        isLoading: false,
-        error: null
-      });
-    }, 1500);
-  }, []);
-  
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-  
-  return { ...state, refetch };
+  return { 
+    data: data ? { message: "API connection successful", competitions: data.competitions || [] } : null,
+    isLoading, 
+    error,
+    refetch 
+  };
 };
 
 // Main Component
@@ -369,9 +357,12 @@ const APITester: React.FC = () => {
           Enhanced API Connection Tester
         </h2>
         <p className="text-gray-600">
-          Professional API testing with advanced debugging capabilities
+          Professional API testing with advanced debugging capabilities and Postman integration
         </p>
       </div>
+
+      {/* Postman Integration */}
+      <PostmanSync />
 
       {/* Environment Issues */}
       {environmentIssues.length > 0 && (
