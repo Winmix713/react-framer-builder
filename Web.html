@@ -1,0 +1,436 @@
+<html lang="en" class="h-full"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SoccerPro Analytics — Advanced Football Analytics</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <style>
+      .font-display,
+      .font-text {
+        font-family: "Inter", ui-sans-serif, system-ui;
+      }
+      @keyframes glow-float {
+        0%,
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.2);
+          opacity: 1;
+        }
+      }
+      .glow-light {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 122, 255, 0.6) 0%,
+          rgba(255, 255, 255, 0.4) 30%,
+          transparent 70%
+        );
+        filter: blur(20px);
+        mix-blend-mode: screen;
+        top: 30%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        animation: glow-float 4s ease-in-out infinite;
+        will-change: transform, opacity;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+      .sr-only:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+      }
+    </style>
+  <link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style></head>
+
+  <body class="h-full bg-black text-white antialiased font-text overflow-x-hidden"><div class="aura-background-component fixed top-0 w-full h-screen -z-10"><div class="spline-container absolute top-0 left-0 w-full h-full -z-10"><iframe src="https://my.spline.design/glowingplanetparticles-nhVHji30IRoa5HBGe8yeDiTs" frameborder="0" width="100%" height="100%" id="aura-spline"></iframe></div></div>
+    <!-- Existing header / hero unchanged except small additions -->
+    <header role="banner" class="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-black/20 border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between lg:py-6 py-4">
+          <a href="#" class="flex items-center gap-3">
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 7v5l3 3"></path>
+              <path d="m10 16 2 2 2-2"></path>
+              <path d="M7 10h10"></path>
+            </svg>
+            <span class="text-xl font-display font-semibold tracking-tight">SoccerPro Analytics</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+            <a href="#livedata" class="px-4 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition">Live Data</a>
+            <a href="#features" class="px-4 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition">Features</a>
+            <a href="#pricing" class="px-4 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition">Pricing</a>
+            <a href="#contact" class="px-4 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition">Contact</a>
+          </nav>
+
+          <div class="flex items-center gap-2">
+            <button class="hidden sm:inline-flex h-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 text-sm text-white/90 hover:bg-white/10 hover:border-white/20 transition">
+              Sign In
+            </button>
+            <button class="group relative inline-flex h-10 items-center justify-center rounded-xl bg-white px-5 text-sm font-semibold text-black hover:bg-white/90 transition">
+              <span class="relative z-10">Get Started</span>
+              <div class="absolute inset-0 rounded-xl bg-white opacity-0 blur-lg group-hover:opacity-20 transition"></div>
+            </button>
+            <button class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" role="main" class="">
+      <!-- HERO -->
+      <section class="relative lg:pt-32 lg:pb-24 pt-8 pb-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 xl:gap-16 items-center">
+          <div class="relative z-10 lg:col-span-6 xl:col-span-5">
+            <span class="animate-slide-up delay-200 mb-6 inline-flex items-center gap-3 border border-white/10 bg-white/5 rounded-full px-4 py-2 text-sm text-white/80">
+              <span class="h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
+              <span class="text-xs font-medium">Premium</span>
+              <span class="h-4 w-px bg-white/20"></span>
+              <span class="text-xs">Live Data</span>
+            </span>
+
+            <h1 class="animate-slide-up delay-300 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[0.95] mb-6 font-display font-light tracking-tighter">
+              Advanced Football
+              <span class="block bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent">Analytics</span>
+            </h1>
+
+            <p class="animate-slide-up delay-500 text-lg sm:text-xl leading-relaxed text-white/70 max-w-2xl mb-8">
+              Deep insights, real-time data, and comprehensive statistics from
+              the world’s top football leagues.
+            </p>
+
+            <div class="animate-slide-up delay-700 flex flex-col sm:flex-row gap-4">
+              <button class="group relative inline-flex items-center gap-3 rounded-2xl bg-white px-8 py-4 text-base font-semibold text-black hover:bg-white/90 transition">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 7v5l3 3"></path>
+                </svg>
+                <span>Explore Live Data</span>
+              </button>
+              <button class="group inline-flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 px-8 py-4 text-base text-white/90 hover:bg-white/10 hover:border-white/25">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Watch Demo
+              </button>
+            </div>
+
+            <!-- Subscription form -->
+            <form class="animate-slide-up delay-900 mt-8 flex flex-col sm:flex-row gap-4 max-w-lg">
+              <input type="email" placeholder="Your email address" class="flex-1 rounded-xl border border-white/15 bg-white/5 px-4 py-3 placeholder-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" required="">
+              <button type="submit" class="rounded-xl bg-blue-500 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-600 transition">
+                Subscribe
+              </button>
+            </form>
+          </div>
+
+          <!-- Hero visual unchanged -->
+          <div class="relative lg:col-span-6 xl:col-span-7">
+            <div class="animate-blur-in delay-500 relative aspect-[4/3] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 ring-1 ring-white/5 shadow-2xl shadow-black/40">
+              <img src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=1080&amp;q=80" alt="Football analytics dashboard" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent"></div>
+              <div class="glow-light"></div>
+              <div class="absolute bottom-4 left-4 right-4">
+                <div class="rounded-xl bg-black/40 p-3 ring-1 ring-white/10 backdrop-blur-xl">
+                  <p class="text-sm font-medium">Premier League Live</p>
+                  <p class="text-xs text-white/70 mt-0.5">Updated every second</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section id="features" class="scroll-animate py-20 lg:py-32 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+          <h2 class="sm:text-4xl lg:text-5xl text-3xl font-light tracking-tighter font-display mb-6">
+            Six Key&nbsp;
+            <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent">Benefits</span>
+          </h2>
+          <p class="max-w-2xl mx-auto text-lg text-white/70 leading-relaxed">
+            Unlock game-changing insights with our professional-grade toolset.
+          </p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/5 to-transparent ring-1 ring-white/5 shadow-2xl shadow-black/40 p-6 lg:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              <!-- Existing three cards kept, three more below -->
+              <!-- CARD 4 -->
+              <article class="group overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/8 to-white/4 p-6 hover:from-white/12 hover:to-white/6">
+                <div class="h-48 lg:h-52 flex items-center justify-center rounded-xl ring-1 ring-white/10 mb-6 bg-white/5">
+                  <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="text-blue-400">
+                    <path d="M3 12v7a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-7"></path>
+                    <path d="M16 6 12 2 8 6"></path>
+                    <path d="M12 2v13"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-display font-semibold tracking-tight mb-3">
+                  Cloud Sync
+                </h3>
+                <p class="text-white/70 leading-relaxed mb-6">
+                  Access your analytics anywhere with real-time data
+                  synchronization across devices.
+                </p>
+              </article>
+
+              <!-- CARD 5 -->
+              <article class="group overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/8 to-white/4 p-6 hover:from-white/12 hover:to-white/6">
+                <div class="h-48 lg:h-52 flex items-center justify-center rounded-xl ring-1 ring-white/10 mb-6 bg-white/5">
+                  <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="text-purple-400">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-display font-semibold tracking-tight mb-3">
+                  Predictive AI
+                </h3>
+                <p class="text-white/70 leading-relaxed mb-6">
+                  Machine-learning models deliver match outcome probabilities and
+                  performance forecasts.
+                </p>
+              </article>
+
+              <!-- CARD 6 -->
+              <article class="group overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/8 to-white/4 p-6 hover:from-white/12 hover:to-white/6">
+                <div class="h-48 lg:h-52 flex items-center justify-center rounded-xl ring-1 ring-white/10 mb-6 bg-white/5">
+                  <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="text-green-400">
+                    <path d="M4 4h16v4H4zM4 12h16v8H4z"></path>
+                    <path d="M4 12h16"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-display font-semibold tracking-tight mb-3">
+                  Custom Reports
+                </h3>
+                <p class="text-white/70 leading-relaxed mb-6">
+                  Generate tailored dashboards and export insights in multiple
+                  formats effortlessly.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="scroll-animate py-20 lg:py-32 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-light tracking-tighter mb-6">
+            What Our&nbsp;
+            <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent">Customers Say</span>
+          </h2>
+          <p class="max-w-2xl mx-auto text-lg text-white/70 leading-relaxed">
+            Trusted by analysts, coaches, and scouts around the globe.
+          </p>
+        </div>
+
+        <div class="max-w-6xl mx-auto grid gap-8 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-6 lg:px-8">
+          <!-- Testimonial 1 -->
+          
+
+          <!-- Testimonial 2 -->
+          
+
+          <!-- Testimonial 3 -->
+          
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section id="pricing" class="scroll-animate py-20 lg:py-32 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-light tracking-tighter mb-6">
+            Transparent&nbsp;
+            <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent">Pricing</span>
+          </h2>
+          <p class="max-w-2xl mx-auto text-lg text-white/70 leading-relaxed">
+            Choose the plan that fits your needs—no hidden fees.
+          </p>
+        </div>
+
+        <div class="max-w-5xl mx-auto grid gap-8 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-6 lg:px-8">
+          <!-- Tier 1 -->
+          <div class="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+            <h3 class="text-xl font-semibold mb-2">Starter</h3>
+            <p class="text-sm text-white/70 mb-6">
+              Essential tools for hobbyists and small clubs.
+            </p>
+            <p class="text-4xl font-display font-light tracking-tighter mb-6">
+              $29<span class="text-base font-medium">/mo</span>
+            </p>
+            <ul class="flex-1 space-y-3 text-sm text-white/80 mb-6">
+              <li>Live scores &amp; basic stats</li>
+              <li>5 custom reports / month</li>
+              <li>Email support</li>
+            </ul>
+            <button class="rounded-xl bg-white text-black font-semibold py-3 hover:bg-white/90 transition">
+              Get Started
+            </button>
+          </div>
+
+          <!-- Tier 2 -->
+          <div class="flex flex-col rounded-2xl border border-blue-400/50 bg-blue-400/10 ring-1 ring-blue-400/30 p-6 backdrop-blur-xl shadow-2xl shadow-blue-500/20">
+            <h3 class="text-xl font-semibold mb-2">Pro</h3>
+            <p class="text-sm text-white/70 mb-6">
+              Advanced analytics for ambitious teams.
+            </p>
+            <p class="text-4xl font-display font-light tracking-tighter mb-6">
+              $79<span class="text-base font-medium">/mo</span>
+            </p>
+            <ul class="flex-1 space-y-3 text-sm text-white/80 mb-6">
+              <li>Everything in Starter</li>
+              <li>Unlimited reports</li>
+              <li>Predictive AI models</li>
+              <li>Priority support</li>
+            </ul>
+            <button class="rounded-xl bg-blue-500 text-white font-semibold py-3 hover:bg-blue-600 transition">
+              Upgrade
+            </button>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+            <h3 class="text-xl font-semibold mb-2">Enterprise</h3>
+            <p class="text-sm text-white/70 mb-6">
+              Full platform access for large organizations.
+            </p>
+            <p class="text-4xl font-display font-light tracking-tighter mb-6">
+              Custom
+            </p>
+            <ul class="flex-1 space-y-3 text-sm text-white/80 mb-6">
+              <li>Dedicated account manager</li>
+              <li>On-premise deployments</li>
+              <li>24/7 phone support</li>
+              <li>Custom integrations</li>
+            </ul>
+            <button class="rounded-xl bg-white text-black font-semibold py-3 hover:bg-white/90 transition">
+              Contact Sales
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer role="contentinfo" class="border-t border-white/10 bg-black/20 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid gap-12 md:grid-cols-4">
+        <!-- Logo & blurb -->
+        <div class="space-y-4">
+          <a href="#" class="flex items-center gap-3">
+            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 7v5l3 3"></path>
+            </svg>
+            <span class="text-lg font-display font-semibold tracking-tight">SoccerPro</span>
+          </a>
+          <p class="text-sm text-white/60">
+            Professional analytics powering the next generation of football
+            strategy.
+          </p>
+          <div class="flex gap-3">
+            <a href="#" class="h-9 w-9 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 8.3a6.9 6.9 0 01-2 .6A3.5 3.5 0 0017.5 6a7 7 0 01-2.2.9A3.5 3.5 0 009.3 9a9.9 9.9 0 01-7.2-3.6 3.5 3.5 0 001.1 4.6A3.4 3.4 0 011.6 10v.1A3.5 3.5 0 003.5 13a3.5 3.5 0 01-1.6.1 3.5 3.5 0 003.3 2.5A7 7 0 010 17.3a9.9 9.9 0 005.4 1.6"></path>
+              </svg>
+            </a>
+            <a href="#" class="h-9 w-9 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M16 8a6 6 0 11-12 0 6 6 0 0112 0z"></path>
+                <path d="M12 4.5V7l2 .5"></path>
+              </svg>
+            </a>
+            <a href="#" class="h-9 w-9 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="1" y="1" width="16" height="16" rx="4"></rect>
+                <path d="M8 11V7l3 2-3 2z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigation columns -->
+        <div>
+          <h4 class="text-sm font-semibold mb-4">Platform</h4>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li><a href="#features" class="hover:text-white">Features</a></li>
+            <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
+            <li><a href="#contact" class="hover:text-white">Contact</a></li>
+            <li><a href="#" class="hover:text-white">Docs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li><a href="#" class="hover:text-white">About</a></li>
+            <li><a href="#" class="hover:text-white">Careers</a></li>
+            <li><a href="#" class="hover:text-white">Blog</a></li>
+            <li><a href="#" class="hover:text-white">Press</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li><a href="#" class="hover:text-white">Privacy</a></li>
+            <li><a href="#" class="hover:text-white">Terms</a></li>
+            <li><a href="#" class="hover:text-white">Security</a></li>
+            <li><a href="#" class="hover:text-white">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 text-center py-6 text-sm text-white/60">
+        © 2025 SoccerPro Analytics. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Scroll-to-top button kept -->
+    <button id="scrollToTop" class="fixed bottom-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 hidden" aria-label="Scroll to top">
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7 7 7M12 3v18"></path>
+      </svg>
+    </button>
+
+    <!-- JS (counters & utilities unchanged) -->
+    <script>
+      /* Scroll-to-top */
+      const scrollBtn = document.getElementById("scrollToTop");
+      window.addEventListener("scroll", () => {
+        scrollBtn.classList.toggle("hidden", window.scrollY < 400);
+      });
+      scrollBtn.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+    </script>
+  
+</body></html>
